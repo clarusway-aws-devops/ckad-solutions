@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: clarus-svc
+  name: clarus-svc
+spec:
+  ports:
+  - nodePort: 31946
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: clarus-deploy
+  type: NodePort
