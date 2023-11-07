@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    run: busybox
+  name: hello-job
+spec:
+  completions: 6
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        run: busybox
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - echo hello;sleep 10;echo world
+        image: busybox
+        name: busybox
+        resources: {}
+      restartPolicy: OnFailure
+status: {}
