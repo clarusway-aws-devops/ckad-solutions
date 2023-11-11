@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: demo-context
+  name: demo-context
+spec:
+  containers:
+  - command:
+    - sleep
+    - 5h
+    image: busybox:1.36
+    imagePullPolicy: IfNotPresent
+    name: demo-context
+    resources: {}
+    securityContext:
+      capabilities:
+        add: ["SYS_TIME"]
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+
+
+# kubectl replace  -f demo-context.yaml  --force
