@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cw-logging
+  labels:
+    app: cw-logging
+spec:
+  containers:
+  - name: logging
+    image: nginx
+    # args: ["/bin/sh","-c","i=0; while true; do echo \"$i: $(date)\" >> /var/log/first.log; echo \"$(date) INFO $i\" >> /var/log/second.log; i=$((i+1)); sleep 1; done"]
+    args:
+      - /bin/sh
+      - -c
+      - "i=0; while true; do echo \"$i: $(date)\" >> /var/log/first.log; echo \"$(date) INFO $i\" >> /var/log/second.log; i=$((i+1)); sleep 1; done"
