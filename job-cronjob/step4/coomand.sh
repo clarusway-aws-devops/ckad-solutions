@@ -1,0 +1,1 @@
+kubectl create job test-job --from=cronjob/hello-cronjob
