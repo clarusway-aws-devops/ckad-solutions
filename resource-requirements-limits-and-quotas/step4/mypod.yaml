@@ -10,3 +10,5 @@ spec:
     resources:
       limits:
         memory: "400Mi" 
+
+# kubectl describe limitrange -n test
