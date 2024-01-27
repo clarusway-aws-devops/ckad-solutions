@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cw-nginx
+  labels:
+    tier: frontend
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx:latest
