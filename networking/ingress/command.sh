@@ -1,0 +1,1 @@
+kubectl create ingress test-ingress --class=nginx --rule="ckad.clarusway.us/nginx=nginx-svc:80" --rule="ckad.clarusway.us/apache=apache-svc:80" -n blue
