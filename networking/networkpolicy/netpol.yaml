@@ -2,14 +2,25 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: nginx-netpol
+  namespace: default
 spec:
   podSelector:
     matchLabels:
       tier: frontend
   policyTypes:
-    - Ingress
+  - Ingress
+  - Egress
   ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              role: frontend 
+  - from:
+    - podSelector:
+        matchLabels:
+          role: frontend
+    ports:
+    - protocol: TCP
+      port: 80
+  egress:
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
