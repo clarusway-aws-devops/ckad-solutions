@@ -1,0 +1,46 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: moon-sc
+provisioner: rancher.io/local-path
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: moon-pvc
+spec:
+  storageClassName: moon-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-moon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moon
+  template:
+    metadata:
+      labels:
+        app: moon
+    spec:
+      containers:
+      - name: moon  
+        image: httpd:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/tmp/data"
+          name: moon-storage
+      volumes:
+      - name: moon-storage
+        persistentVolumeClaim:
+          claimName: moon-pvc
