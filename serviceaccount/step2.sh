@@ -1,0 +1,1 @@
+kubectl -n sun get secret sun-sa-secret -o=jsonpath='{.data.token}' | base64 -d > /opt/sun/token
