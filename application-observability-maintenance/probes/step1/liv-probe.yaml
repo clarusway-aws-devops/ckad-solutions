@@ -16,5 +16,6 @@ spec:
       exec:
         command:
         - ls
+        - /opt
   dnsPolicy: ClusterFirst
   restartPolicy: Never
