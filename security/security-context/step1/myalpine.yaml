@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: myalpine
+  name: myalpine
+  namespace: default
+spec:
+  containers:
+  - command:
+    - sleep
+    - "3600"
+    image: alpine
+    name: myalpine
+    resources: {}
+  securityContext:
+    runAsUser: 1010
+    runAsGroup: 2000
+  serviceAccount: default
+  serviceAccountName: default

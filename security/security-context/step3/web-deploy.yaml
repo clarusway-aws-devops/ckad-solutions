@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy       # name stays the same
+  namespace: prod     # important
+spec:
+  replicas: 3           # 3 replicas
+  selector:
+    matchLabels:
+      project: web      # set the correct selector
+  template:
+    # => from here down its the same as the pods metadata: and spec: sections
+    metadata:
+      labels:
+        project: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.27.0
+        securityContext:                   # add
+          allowPrivilegeEscalation: false  # add
+          privileged: false                # add
